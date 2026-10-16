@@ -1,1 +1,25 @@
-
+name: check
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright && playwright install --with-deps chromium
+      - run: python check.py
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TEST: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+      - run: |
+          git config user.name bot
+          git config user.email bot@example.com
+          git add seen.json
+          git diff --cached --quiet || (git commit -m seen && git push)
