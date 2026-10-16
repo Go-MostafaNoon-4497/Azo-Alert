@@ -1,11 +1,7 @@
 import os, json, re, math, random, urllib.request
 from playwright.sync_api import sync_playwright
 
-URL = ("https://www.amazon.eg/-/en/tez/browse/?_encoding=UTF8&qcbrand=sAuWWBROaG"
-       "&ref_=eg_cat_halo_bau_now&pd_rd_w=7bOZz"
-       "&content-id=amzn1.sym.6b54521d-12e1-4b35-9cd0-81983d60ca51"
-       "&pf_rd_p=6b54521d-12e1-4b35-9cd0-81983d60ca51&pf_rd_r=KFNSY6RM9D77SWG0C0ZJ"
-       "&pd_rd_wg=ORDi1&pd_rd_r=5ef9cb12-727a-4f1b-bc71-7c898b059a55")
+URL = ("https://www.amazon.eg/-/en/tez/browse)
 MIN_DISCOUNT = 40
 TOPIC = os.environ["NTFY_TOPIC"]
 TEST = os.environ.get("TEST") == "1"
