@@ -1,7 +1,7 @@
 name: check
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -21,5 +21,5 @@ jobs:
       - run: |
           git config user.name bot
           git config user.email bot@example.com
-          git add seen.json
+          git add seen.json || true
           git diff --cached --quiet || (git commit -m seen && git push)
